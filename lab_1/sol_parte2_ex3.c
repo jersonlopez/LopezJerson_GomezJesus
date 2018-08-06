@@ -21,9 +21,8 @@ float suma(int x, int n)
 {
     float result = 1;
     int flag = 1;
-    for (int i = 2; i <= n; i += 2)
+    for (int i = 2; i <n*2; i += 2)
     {
-
         if (flag == 1){
             result -= pow(x, i)/factorial(i);
             flag = 0;
