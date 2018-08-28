@@ -22,10 +22,13 @@ void stringToMayuscula(char s[]);
 
 
 int main(void) {
-  char string[] = "";
+  char *string = malloc(256);
   while(1 == 1){
     printf("Entrada > ");
-    scanf("%s", string);
+    fgets(string, 256, stdin);
+    /* Eliminar nueva línea final, si existe. */
+    if ((strlen(string) > 0) && (string[strlen (string) - 1] == '\n'))
+        string[strlen (string) - 1] = '\0';
     printf("clean : %s\n", string);
     stringToMayuscula(string);
     printf("%s\n", string);
@@ -33,6 +36,7 @@ int main(void) {
   testEsLetra();
   testVolverMayuscula();
   testStringToMayuscula();
+  free (string);
   return 0;
 }
 
