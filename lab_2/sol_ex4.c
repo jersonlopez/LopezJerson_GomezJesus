@@ -22,8 +22,16 @@ void stringToMayuscula(char s[]);
 
 
 int main(void) {
-    testEsLetra();
-    testVolverMayuscula();
+  char string[] = "";
+  while(1 == 1){
+    printf("Entrada > ");
+    scanf("%s", string);
+    printf("clean : %s\n", string);
+    stringToMayuscula(string);
+    printf("%s\n", string);
+  }
+  testEsLetra();
+  testVolverMayuscula();
   testStringToMayuscula();
   return 0;
 }
