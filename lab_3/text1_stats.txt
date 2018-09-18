@@ -1,0 +1,7 @@
+chars: 47
+words: 10
+lines: 2
+whitespaces: 8
+uppercases: 1
+lowercases: 30
+digits: 6

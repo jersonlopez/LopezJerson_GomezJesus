@@ -1,4 +1,7 @@
-#include "stdio.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 
 int characterCounter(int *characterNumber) {
     return (*characterNumber)++;
@@ -46,6 +49,16 @@ int digitCounter(char character, int *digitNumber) {
     return *digitNumber;
 }
 
+void *nameFile(char *filename, char *name){
+    for(int i=0;i<sizeof(filename);i++){
+        if(*(filename+i)!='.'){
+            *(name+i) = *(filename+i);
+        }else{
+            i = sizeof(filename);
+        }
+    }
+}
+
 struct stats {
   int chars;
   int words;
@@ -62,6 +75,7 @@ int main()
     char filename[80];
     char character;
     FILE *inputFile;
+    FILE *outFile;
     int characters = 0, words = 0, lines = 0, whitespaces = 0, uppercases = 0, lowercases = 0, digits = 0;
 
     printf("Entre el nombre del archivo que sera analizado: ");
@@ -82,14 +96,27 @@ int main()
         text.lowercase = lowercasesCounter (character, &lowercases);
         text.digits = digitCounter(character, &digits);
     }
-
-    printf("chars: %d\n", text.chars);
-    printf("words: %d\n", text.words);
-    printf("lines: %d\n", text.lines);
-    printf("whitespaces: %d\n", text.whitespaces);
-    printf("uppercases: %d\n", text.uppercase);
-    printf("lowercases: %d\n", text.lowercase);
-    printf("digits: %d\n", text.digits);
+    char name[80];
+    nameFile(filename,name);
+    printf("%c",*(name));
+    strcat(name,"_stats.txt");
+    outFile = fopen (name, "w" );
+    char cadena[50];
+    sprintf(cadena,"chars: %d\n", text.chars);
+    fputs( cadena, outFile );
+    sprintf(cadena,"words: %d\n", text.words);
+    fputs( cadena, outFile );
+    sprintf(cadena,"lines: %d\n", text.lines);
+    fputs( cadena, outFile );
+    sprintf(cadena,"whitespaces: %d\n", text.whitespaces);
+    fputs( cadena, outFile );
+    sprintf(cadena,"uppercases: %d\n", text.uppercase);
+    fputs( cadena, outFile );
+    sprintf(cadena,"lowercases: %d\n", text.lowercase);
+    fputs( cadena, outFile );
+    sprintf(cadena,"digits: %d\n", text.digits);
+    fputs( cadena, outFile ); 	
+ 	fclose ( outFile );
 
 };
 
