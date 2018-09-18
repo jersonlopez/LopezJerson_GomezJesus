@@ -26,7 +26,7 @@ int main()
     char character;
     FILE *inputFile;
     FILE *outFile;
-    int characters = 0, words = 0, lines = 0, whitespaces = 0, uppercases = 0, lowercases = 0, digits = 0;
+    int characters = 1, words = 0, lines = 1, whitespaces = 0, uppercases = 0, lowercases = 0, digits = 0;
 
     printf("Ingrese el nombre del archivo que sera analizado: ");
     gets(filename);
@@ -46,6 +46,7 @@ int main()
         text.lowercase = lowercasesCounter (character, &lowercases);
         text.digits = digitCounter(character, &digits);
     }
+
     printf("Obteniendo estadisticas...\n");
     char name[80];
     nameFile(filename,name);
