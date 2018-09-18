@@ -1,63 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-
-int characterCounter(int *characterNumber) {
-    return (*characterNumber)++;
-}
-
-int wordsCounter(char character, int *wordNumber) {
-    if( character == ' ' || character == '\n')
-        (*wordNumber)++;
-
-    return *wordNumber;
-}
-
-int linesCounter(char character, int *lineNumber) {
-    if( character == '\n')
-        (*lineNumber)++;
-        
-    return *lineNumber;
-}
-
-int whitespacesCounter(char character, int *whitespaceNumber) {
-    if( character == ' ')
-        (*whitespaceNumber)++;
-        
-    return *whitespaceNumber;
-}
-
-int uppercasesCounter(char character, int *uppercaseNumber) {
-    if( character >= 65 && character <= 90)
-        (*uppercaseNumber)++;
-        
-    return *uppercaseNumber;
-}
-
-int lowercasesCounter(char character, int *lowercaseNumber) {
-    if( character >= 97 && character <= 122)
-        (*lowercaseNumber)++;
-        
-    return *lowercaseNumber;
-}
-
-int digitCounter(char character, int *digitNumber) {
-    if( character >= 48 && character <= 57)
-        (*digitNumber)++;
-        
-    return *digitNumber;
-}
-
-void *nameFile(char *filename, char *name){
-    for(int i=0;i<sizeof(filename);i++){
-        if(*(filename+i)!='.'){
-            *(name+i) = *(filename+i);
-        }else{
-            i = sizeof(filename);
-        }
-    }
-}
+#include "character_counter.h"
+#include "digit_counter.h"
+#include "lines_counter.h"
+#include "lowercases_counter.h"
+#include "uppercases_counter.h"
+#include "whitespaces_Counter.h"
+#include "words_counter.h"
 
 struct stats {
   int chars;
@@ -78,7 +28,7 @@ int main()
     FILE *outFile;
     int characters = 0, words = 0, lines = 0, whitespaces = 0, uppercases = 0, lowercases = 0, digits = 0;
 
-    printf("Entre el nombre del archivo que sera analizado: ");
+    printf("Ingrese el nombre del archivo que sera analizado: ");
     gets(filename);
     inputFile = fopen(filename,"r");
 
@@ -96,10 +46,11 @@ int main()
         text.lowercase = lowercasesCounter (character, &lowercases);
         text.digits = digitCounter(character, &digits);
     }
+    printf("Obteniendo estadisticas...\n");
     char name[80];
     nameFile(filename,name);
-    printf("%c",*(name));
     strcat(name,"_stats.txt");
+    printf("%s --> generando reporte %s\n", filename, name);
     outFile = fopen (name, "w" );
     char cadena[50];
     sprintf(cadena,"chars: %d\n", text.chars);
@@ -117,7 +68,7 @@ int main()
     sprintf(cadena,"digits: %d\n", text.digits);
     fputs( cadena, outFile ); 	
  	fclose ( outFile );
-
+    printf("Estadisticas culminadas\n");
 };
 
 // uppercase
