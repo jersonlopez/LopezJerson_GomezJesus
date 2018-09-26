@@ -1,0 +1,20 @@
+Pid: 0
+Nombre del proceso: 	ksoftirqd/0�.
+V
+Estado del proceso: 	S (sleeping)
+Tamaño total de la imagen de memoria: 
+Tamaño de la sección de memoria TEXT: 
+Tamaño de la sección de memoria DATA: 
+Tamaño de la sección de memoria STACK: 
+Voluntarios: 221
+No voluntarios: 15994
+_________________________________________________Pid: 0
+Nombre del proceso: 	kblockd
+Estado del proceso: 	I (idle)
+Tamaño total de la imagen de memoria: 
+Tamaño de la sección de memoria TEXT: 
+Tamaño de la sección de memoria DATA: 
+Tamaño de la sección de memoria STACK: 
+Voluntarios: 0
+No voluntarios: 2
+_________________________________________________
