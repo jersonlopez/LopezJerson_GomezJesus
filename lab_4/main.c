@@ -17,29 +17,19 @@ void split(char *original, char *partition, char character){
     }
 };
 
-int main()
-{
-    char filename[80];
-    char address[80]= "/proc/";
+void show_process(char *address){
+    char character;
     char name[80];
     char value[80];
-    char character;
-    int i = 0;
     FILE *inputFile;
-
-    printf("Ingrese el numero del proceso: ");
-    gets(filename);
-    strcat(filename,"/status");
-    strcat(address,filename);
-
-    printf("direccion a abrir %s\n", address);
+    printf("Direccion a abrir %s\n", address);
     inputFile = fopen(address,"r");
 
     if ( inputFile == NULL) {
         printf("Error al abrir el archivo %s\n", address);
-        return 0;
     }
 
+    int i = 0;
     while((character = fgetc(inputFile)) != EOF){
         if(character != '\n'){
             if(i<80){
@@ -72,7 +62,38 @@ int main()
         }
     }
     fclose(inputFile);
+}
+
+int main(int argc, char *argv[])
+{  
+    char address[80];
     
+    switch(argc){
+        case 2:
+            sprintf(address, "/proc/%s/status", argv[1]);
+            show_process(address);
+        break;
+
+        case 1:
+            printf("Ingrese el numero del proceso del proceso");
+            return 0;
+        break;
+
+        default:
+            switch(*argv[1]){
+                case '-l':
+                break;
+
+                case '-r':
+                break;
+
+                default:
+                    printf("Ingreso mal el comando");
+                return 0;
+            }
+        break;        
+    }
+    return 0;
 };
 
 // uppercase
