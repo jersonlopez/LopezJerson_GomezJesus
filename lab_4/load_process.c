@@ -10,9 +10,11 @@ void load_process(char *address, proc *info_proc){
     if ( inputFile == NULL) {
         printf("Error al abrir el archivo %s que contiene la información del proceso, ", address);
         printf("es posible que el proceso no exista o se equivoco al ingresar el proceso proceso\n");
+        info_proc->pid=-1;
         return;
     }
 
+    info_proc->pid=0;
     int i = 0;
     while((character = fgetc(inputFile)) != EOF){
         if(character != '\n'){
@@ -23,7 +25,7 @@ void load_process(char *address, proc *info_proc){
         }else{
             split(value,name,':');
             i = 0;
-            if (strstr(name, "Pid")){
+            if (strstr(name, "Pid")&&info_proc->pid == 0){
                 info_proc->pid=atoi(value);
             }else if (strstr(name, "Name")){
                 strcpy(info_proc->name,value);

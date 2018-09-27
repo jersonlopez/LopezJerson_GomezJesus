@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
                 for(int i=0;i<argc-2;i++){
                     sprintf(address, "/proc/%s/status", argv[i+2]);
                     load_process(address, proc_info);
-                    if(!strstr(proc_info->name, "")){
+                    if(proc_info->pid!=-1){
                         show_process(proc_info);
                     }                    
                 }
@@ -33,16 +33,20 @@ int main(int argc, char *argv[])
                 }
                 strcat(name,".info");
                 outFile = fopen (name, "w" );
+                printf("Se esta generando el informe: %s.\n",name);
                 for(int i=0;i<argc-2;i++){
                     sprintf(address, "/proc/%s/status", argv[i+2]);
                     load_process(address, proc_info);
-                    if(!strstr(proc_info->name, "")){
+                    if(proc_info->pid!=-1){                           
                         save_process(outFile,proc_info);
                     }else{
+                        printf("Ocurrio un error al generar el informe: %s.\n",name);
                         remove(name);
+                        return 0;
                     }
                 }
                 fclose(outFile);
+                printf("Informe generado.\n");   
             }else {
                 show_error();
             }
