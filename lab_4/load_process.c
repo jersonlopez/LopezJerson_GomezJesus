@@ -9,7 +9,7 @@ void load_process(char *address, proc *info_proc){
 
     if ( inputFile == NULL) {
         printf("Error al abrir el archivo %s que contiene la información del proceso, ", address);
-        printf("es posible que el proceso no exista o se equivoco al ingresar el proceso proceso\n");
+        printf("es posible que el proceso no exista o se equivoco al ingresar el proceso\n");
         info_proc->pid=-1;
         return;
     }

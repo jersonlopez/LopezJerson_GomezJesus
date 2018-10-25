@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "type_traits": "c",
-        "typeinfo": "c",
-        "split.h": "c",
-        "struct_proc.h": "c",
-        "show_process.h": "c"
-    }
-}
