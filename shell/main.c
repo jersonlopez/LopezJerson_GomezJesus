@@ -8,10 +8,12 @@
 #include <stdbool.h>
 #include "parser.h"
 #include "sources/color.h"
+#include <sys/utsname.h>
 #define TAM 100
 
 void execute_cd(char **args);
 void execute_pwd();
+void show_commands();
 int execute(char *command, char **params, bool background);
 
 int main()
@@ -19,12 +21,19 @@ int main()
 	char **items;
 	int num, background;
 	char expresion[TAM];
+	struct utsname unameInfo;
 
 	while (1)
 	{
-		printf("%sUdea-Shell%s# ",VERDE,BLANCO);
-		fgets(expresion, TAM, stdin);
 
+		if (uname(&unameInfo)==-1)
+        {
+            printf("%sUdea-Shell%s# ",VERDE,BLANCO);
+        }else{
+			printf("%s(%s%s@%s%s):%sUdea-Shell%s# ",BLANCO,AZUL,unameInfo.sysname,unameInfo.nodename,BLANCO,VERDE,BLANCO);			
+		}
+
+		fgets(expresion, TAM, stdin);
 		num = separaItems(expresion, &items, &background);
 
 		if (num > 0)
@@ -49,6 +58,10 @@ int main()
 			else if (strcmp(items[0], "udea-time") == 0)
 			{
 				execute("./sources/udea-time", items, background);								
+			}
+			else if (strcmp(items[0], "udea-help") == 0)
+			{
+				show_commands();
 			}
 			else if (strcmp(items[0], "udea-exit") == 0)
 			{
@@ -95,7 +108,7 @@ void execute_pwd()
 	cwd = getcwd(buff, PATH_MAX + 1);
 	if (cwd != NULL)
 	{
-		printf("%sUsted se encuentra parado en: %s%s.\n",MARRON,BLANCO,cwd);
+		printf("%sUsted se encuentra parado en: %s%s\n",MARRON,BLANCO,cwd);
 	}
 }
 
@@ -112,4 +125,15 @@ void execute_cd(char **args)
 			printf("Error: %sEl directorio ingresado no existe o lo escribio de forma incorrecta\n",ROJO);
 		}
 	}
+}
+
+void show_commands(){
+	printf("%sLos comandos internos son:\n",MARRON);
+	printf("%sudea-pwd:\t%sImprime en pantalla el directorio de trabajo actual\n",VERDE,BLANCO);
+	printf("%sudea-cd:\t%sCambia el directorio de trabajo del sheel\n",VERDE,BLANCO);
+	printf("%sudea-echo:\t%sImprime el mensaje en pantalla\n",VERDE,BLANCO);
+	printf("%sudea-clr:\t%sLimpia pantalla\n",VERDE,BLANCO);
+	printf("%sudea-time:\t%sImprime el tiempo actual del sistema\n",VERDE,BLANCO);
+	printf("%sudea-help:\t%sImprime los comandos internos\n",VERDE,BLANCO);
+	printf("%sudea-exit:\t%sFinaliza la ejecución del Udea-Shell\n",VERDE,BLANCO);
 }
