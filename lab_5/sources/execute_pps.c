@@ -8,8 +8,8 @@ int main(int argc, char *argv[])
 {
 	char num[100];	
 	char num2[100];	
-	char filename[80] = "benchmark/vec_10_8_a.txt";
-	char filename2[80] = "benchmark/vec_10_8_b.txt";
+	char filename[80] = "benchmark/vec_10_1_a.txt";
+	char filename2[80] = "benchmark/vec_10_1_b.txt";
 	double resultado = 0;
 	//strcat(filename,"_stats.txt");
 	FILE *inputFile;
@@ -17,11 +17,11 @@ int main(int argc, char *argv[])
 	inputFile = fopen(filename,"r");
 	inputFile2 = fopen(filename2,"r");
 
-    if ( inputFile == NULL) {
+    if(inputFile == NULL) {
         printf("Error al abrir el archivo %s\n", filename);
         return 0;
     }
-	if ( inputFile2 == NULL) {
+	if(inputFile2 == NULL) {
         printf("Error al abrir el archivo %s\n", filename2);
         return 0;
     }
