@@ -130,8 +130,8 @@ void execute_cd(char **args)
 void show_commands(){
 	printf("%sLos comandos internos son:\n",MARRON);
 	printf("%sudea-pwd:\t%sImprime en pantalla el directorio de trabajo actual\n",VERDE,BLANCO);
-	printf("%sudea-cd:\t%sCambia el directorio de trabajo del sheel\n",VERDE,BLANCO);
-	printf("%sudea-echo:\t%sImprime el mensaje en pantalla\n",VERDE,BLANCO);
+	printf("%sudea-cd:\t%sCambia el directorio de trabajo del sheel, por ejemplo: %sudea-cd ..\n",VERDE,BLANCO,ROJO);
+	printf("%sudea-echo:\t%sImprime el mensaje en pantalla, por ejemplo: %sudea-echo hola mundo\n",VERDE,BLANCO,ROJO);
 	printf("%sudea-clr:\t%sLimpia pantalla\n",VERDE,BLANCO);
 	printf("%sudea-time:\t%sImprime el tiempo actual del sistema\n",VERDE,BLANCO);
 	printf("%sudea-help:\t%sImprime los comandos internos\n",VERDE,BLANCO);
